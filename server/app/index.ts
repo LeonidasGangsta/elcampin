@@ -10,8 +10,9 @@ app.use(routes);
 app.listen(port, () => {
   console.log(`server running at http://localhost:${port}`);
 
-  //Connect to the database
-  sequelize.authenticate()
+  // Connect to the database
+  // Force to DROP TABLES
+  sequelize.sync({ force: false })
     .then(() => {
       console.log('Database was connected succesfully')
     }).catch((err) => {
