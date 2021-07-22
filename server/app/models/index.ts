@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "src/database/db";
-import { BarnModelType } from "../types/models";
+import { BarnModelType, LogsModelType } from "../types/models";
 
-const Barn: BarnModelType = sequelize.define('Barn', {
+export const Barn: BarnModelType = sequelize.define('Barn', {
   barnNumber: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -17,4 +17,16 @@ const Barn: BarnModelType = sequelize.define('Barn', {
   }
 });
 
-export default Barn;
+export const Logs: LogsModelType = sequelize.define('Logs', {
+  date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  eggs: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  chickensInIt: {
+    type: DataTypes.INTEGER,
+  }
+});

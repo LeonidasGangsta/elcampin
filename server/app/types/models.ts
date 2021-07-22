@@ -14,12 +14,12 @@ export type BarnModelType = ModelCtor<Model<{
 
 export type LogsModelType = ModelCtor<Model<{
   id: number,
-  barnNumber: number, 
-  maxCapacity: number, 
+  eggs: number, 
+  date: number, 
   chickensInIt?: number,
 },
 {
-  barnNumber: number, 
-  maxCapacity: number, 
+  eggs: number, 
+  date: number, 
   chickensInIt: number,
 }>>;

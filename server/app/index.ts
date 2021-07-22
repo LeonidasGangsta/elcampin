@@ -9,7 +9,10 @@ const port = 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(routes);
+// Routes
+const { barns, logs } = routes;
+app.use(barns.route, barns.endpoints);
+app.use(logs.route, logs.endpoints);
 
 app.listen(port, () => {
   console.log(`server running at http://localhost:${port}`);
