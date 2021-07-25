@@ -1,5 +1,5 @@
 import express from 'express';
-import { Barn } from '../models';
+import { Barn, Log } from '../models';
 const BarnsEndpoints = express.Router();
 
 // Get a list of All Barns
@@ -15,7 +15,12 @@ BarnsEndpoints.get('/', async (_req, res) => {
 // Get a the details of a single barn
 BarnsEndpoints.get('/:barnID', async ({ params: { barnID } }, res) => {
   try {
-    const barn = await Barn.findByPk(barnID as string);
+    const barn = await Barn.findByPk(barnID as string, {
+      include: {
+        model: Log,
+        attributes: ['id', 'date', 'eggs', 'chickensInIt', 'createdAt', 'updatedAt'],
+      }
+    });
     res.send(barn);
   } catch (error) {
     res.send(error);    

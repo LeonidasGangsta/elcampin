@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "src/database/db";
-import { BarnModelType, LogsModelType } from "../types/models";
+import { BarnModelType, LogsModelType } from "../types/modelsTypes";
 
 export const Barn: BarnModelType = sequelize.define('Barn', {
   barnNumber: {
@@ -11,16 +11,30 @@ export const Barn: BarnModelType = sequelize.define('Barn', {
   maxCapacity: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    validate: {
+      min: {
+        args: [1],
+        msg: 'The barn must accept more than one chicken'
+      },
+    }
   },
   chickensInIt: {
     type: DataTypes.INTEGER,
+    validate: {
+      lessThanMaxQuantity(value: number) {
+        if (value > this.maxCapacity) {
+          throw new Error('You cannot add more barns than the maximun capacity');
+        }
+      }
+    }
   }
 });
 
-export const Logs: LogsModelType = sequelize.define('Logs', {
+export const Log: LogsModelType = sequelize.define('Logs', {
   date: {
     type: DataTypes.DATEONLY,
     allowNull: false,
+    defaultValue: new Date(),
   },
   eggs: {
     type: DataTypes.INTEGER,
@@ -28,5 +42,9 @@ export const Logs: LogsModelType = sequelize.define('Logs', {
   },
   chickensInIt: {
     type: DataTypes.INTEGER,
-  }
+  },
 });
+
+// Associations
+Barn.hasMany(Log);
+Log.belongsTo(Barn);

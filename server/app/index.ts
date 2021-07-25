@@ -1,6 +1,8 @@
 import sequelize from "../database/db";
 import express from "express";
 import routes from "./routes";
+import { barnsForBD, logsForBD } from "./testingData";
+import { Barn, Log } from "./models";
 
 const app = express();
 const port = 4000;
@@ -19,9 +21,16 @@ app.listen(port, () => {
 
   // Connect to the database
   // Force=true === DROP TABLES
-  sequelize.sync({ force: false })
+  sequelize.sync({ force: true })
     .then(() => {
       console.log('Database was connected succesfully')
+
+      // Inject testing data
+      barnsForBD.forEach(async (barn) => {
+        await Barn.create(barn).catch(console.log);
+        logsForBD.forEach(async (log) => await Log.create(log).catch(console.log));
+      })
+      
     }).catch((err) => {
       console.error(err);
       console.log('An error ocurred trying to connect to the databse')
