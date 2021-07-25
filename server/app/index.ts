@@ -5,7 +5,7 @@ import { barnsForBD, logsForBD } from "./testingData";
 import { Barn, Log } from "./models";
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // Middlewares
 app.use(express.json());
