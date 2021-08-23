@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'airbnb',
     'airbnb-typescript',
   ],
   parser: '@typescript-eslint/parser',
@@ -22,5 +23,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'max-len': [2, 160],
+    'no-underscore-dangle': 0,
   },
 };

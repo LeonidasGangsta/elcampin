@@ -1,6 +1,6 @@
 export const database = {
-  username: "elcampin",
-  password: "elcampin",
+  username: "root",
+  password: "MySql304!",
   database: "elcampin",
   host: "localhost"
 }
