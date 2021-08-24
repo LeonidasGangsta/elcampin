@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import '@fontsource/roboto';
-import './index.css';
+import theme from './styles/theme';
+import './index.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <App />
-    </Router>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
