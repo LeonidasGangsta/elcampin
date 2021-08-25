@@ -34,8 +34,6 @@ module.exports = {
       assert: 'either',
       depth: 3,
     }],
-    'max-len': [2, 160],
-    'no-underscore-dangle': 0,
     'react/destructuring-assignment': 0,
     'react/jsx-max-props-per-line': [2, { maximum: 10 }],
     'object-curly-newline': [2, { minProperties: 6, consistent: true }],
