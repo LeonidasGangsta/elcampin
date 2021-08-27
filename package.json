@@ -1,0 +1,21 @@
+{
+  "name": "elcampin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:fe": "cd ./cliente && npm run build",
+    "start:be": "cd ./server && npm run prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeonidasGangsta/elcampin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeonidasGangsta/elcampin/issues"
+  },
+  "homepage": "https://github.com/LeonidasGangsta/elcampin#readme"
+}

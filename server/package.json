@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register ./app/index.ts",
-    "prod": "tsc && node ./build/app/index.js"
+    "prod": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register ./build/app/index.js"
   },
   "author": "Oscar Torres",
   "license": "ISC",
