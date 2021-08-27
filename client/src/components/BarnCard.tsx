@@ -23,13 +23,13 @@ const useStyles = makeStyles({
 });
 
 type BarnCardProps = {
-  id: number;
+  barnNumber: number;
   chickensInIt: number;
   maxCapacity: number;
 };
 
 const BarnCard: React.FC<BarnCardProps> = ({
-  id,
+  barnNumber,
   chickensInIt,
   maxCapacity,
 }) => {
@@ -47,7 +47,7 @@ const BarnCard: React.FC<BarnCardProps> = ({
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {`Galpon #${id}`}
+            {`Galpon #${barnNumber}`}
           </Typography>
           <List className={classes.list}>
             <ListItem>

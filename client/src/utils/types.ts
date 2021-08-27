@@ -5,4 +5,4 @@ export interface BarnsType {
   maxCapacity: number,
   createdAt: string,
   updatedAt: string,
-};
+}
