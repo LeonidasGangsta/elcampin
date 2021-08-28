@@ -56,7 +56,7 @@ const BarnCard: React.FC<BarnCardProps> = ({
                   <HeightRounded />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Maxima capacidad de gallinas" secondary={`${maxCapacity} gallinas maximo.`} />
+              <ListItemText primary="Maxima capacidad de gallinas" secondary={`${maxCapacity} gallinas.`} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -64,17 +64,14 @@ const BarnCard: React.FC<BarnCardProps> = ({
                   <AssessmentRounded />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Gallinas en el galpon" secondary={`${chickensInIt} gallinas actualmente`} />
+              <ListItemText primary="Gallinas en el galpon" secondary={`${chickensInIt} gallinas`} />
             </ListItem>
           </List>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+          Editar galpon
         </Button>
       </CardActions>
     </Card>

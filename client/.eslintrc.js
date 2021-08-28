@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'react/require-default-props': 0,
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/label-has-associated-control': [2, {
       controlComponents: ['Checkbox'],

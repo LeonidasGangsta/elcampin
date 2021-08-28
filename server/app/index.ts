@@ -1,15 +1,19 @@
 import sequelize from "../database/db";
 import express from "express";
 import routes from "./routes";
-import path from "path";
 import { barnsForBD, logsForBD } from "./testingData";
 import { Barn, Log } from "./models";
+import { CLIENT_DIRECTORY } from "../config";
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 // Serve the react app
-app.use(express.static(path.join(__dirname, '../../client/build')));
+app.use((_req, _res, next) => {
+  console.log(CLIENT_DIRECTORY);
+  next();
+})
+app.use(express.static(CLIENT_DIRECTORY));
 
 // Middlewares
 app.use(express.json());
