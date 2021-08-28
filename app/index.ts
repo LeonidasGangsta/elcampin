@@ -25,28 +25,28 @@ const { barns, logs } = routes;
 app.use(barns.route, barns.endpoints);
 app.use(logs.route, logs.endpoints);
 
+// Connect to the database
+// Force=true === DROP TABLES
+sequelize.sync({ force: true })
+  .then(() => {
+    console.log('Database was connected succesfully')
+
+    // Inject testing data
+    barnsForBD.forEach(async (barn) => {
+      try {
+        const barnCreated = await Barn.create(barn);
+        // @ts-expect-error dataValues is a valid property
+        logsForBD(barnCreated.dataValues.id).forEach(async (log) => await Log.create(log));
+      } catch (error) {
+        console.log(error);
+      }
+    })
+
+  }).catch((err) => {
+    console.error(err);
+    console.log('An error ocurred trying to connect to the databse')
+  });
+
 app.listen(port, () => {
   console.log(`server running at port: ${port}`);
-
-  // Connect to the database
-  // Force=true === DROP TABLES
-  sequelize.sync({ force: true })
-    .then(() => {
-      console.log('Database was connected succesfully')
-
-      // Inject testing data
-      barnsForBD.forEach(async (barn) => {
-        try {
-          const barnCreated = await Barn.create(barn);
-          // @ts-expect-error dataValues is a valid property
-          logsForBD(barnCreated.dataValues.id).forEach(async (log) => await Log.create(log));
-        } catch (error) {
-          console.log(error);          
-        }
-      })
-      
-    }).catch((err) => {
-      console.error(err);
-      console.log('An error ocurred trying to connect to the databse')
-    });
 });
