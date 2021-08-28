@@ -14,4 +14,4 @@ export const database = {
   host: "us-cdbr-east-04.cleardb.com"
 };
 
-export const CLIENT_DIRECTORY = path.join(__dirname, '../client/build');
+export const CLIENT_DIRECTORY = path.join(__dirname, '../../client/build');

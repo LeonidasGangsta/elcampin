@@ -4,19 +4,12 @@ import routes from "./routes";
 import { barnsForBD, logsForBD } from "./testingData";
 import { Barn, Log } from "./models";
 import { CLIENT_DIRECTORY } from "../config";
-import path from "path";
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 // Serve the react app
-app.use((_req, _res, next) => {
-  console.log(CLIENT_DIRECTORY);
-  console.log(path.resolve(__dirname, '../client/build'));
-  console.log(__dirname);
-  next();
-})
-app.use(express.static(path.resolve(__dirname, '../../../client/build')));
+app.use(express.static(CLIENT_DIRECTORY));
 
 // Middlewares
 app.use(express.json());
