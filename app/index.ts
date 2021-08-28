@@ -36,8 +36,13 @@ app.listen(port, () => {
 
       // Inject testing data
       barnsForBD.forEach(async (barn) => {
-        await Barn.create(barn).catch(console.log);
-        logsForBD.forEach(async (log) => await Log.create(log).catch(console.log));
+        try {
+          const barnCreated = await Barn.create(barn);
+          // @ts-expect-error dataValues is a valid property
+          logsForBD(barnCreated.dataValues.id).forEach(async (log) => await Log.create(log));
+        } catch (error) {
+          console.log(error);          
+        }
       })
       
     }).catch((err) => {

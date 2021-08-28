@@ -29,35 +29,35 @@ export const barnsForBD: BarnType[] = [
   },
 ];
 
-export const logsForBD: LogType[] = [
+export const logsForBD = (BarnId: number): LogType[] => [
   {
     chickensInIt: 150,
     date: new Date(),
     eggs: 100,
-    BarnId: 1,
+    BarnId,
   },
   {
     chickensInIt: 150,
     date: new Date(),
     eggs: 100,
-    BarnId: 1,
+    BarnId,
   },
   {
     chickensInIt: 50,
     date: new Date(),
     eggs: 10,
-    BarnId: 1,
+    BarnId,
   },
   {
     chickensInIt: 200,
     date: new Date(),
     eggs: 80,
-    BarnId: 1,
+    BarnId,
   },
   {
     chickensInIt: 200,
     date: new Date(),
     eggs: 120,
-    BarnId: 1,
+    BarnId,
   },
 ];
