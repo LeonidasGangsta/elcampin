@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // Serve the react app
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../../client/build')));
 
 // Middlewares
 app.use(express.json());
