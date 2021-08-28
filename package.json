@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register ./app/index.ts",
     "build": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register ./build/app/index.js",
-    "heroku-prebuild": "npm install && npm run build",
+    "heroku-prebuild": "npm install && npm i --save-dev @types/validator && npm run build",
     "heroku-postbuild": "cd app/client && npm install && npm run build"
   },
   "author": "Oscar Torres",
