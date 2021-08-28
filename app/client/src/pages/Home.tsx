@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
-  const [barns, setBarns] = useState<BarnsType[]>();
+  const [barns, setBarns] = useState<BarnsType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
 
@@ -33,11 +33,11 @@ const Home = () => {
 
   return (
     <Container className={classes.root}>
-      {isLoading ? (
+      {isLoading || !barns.length ? (
         <CircularProgress color="inherit" />
       ) : (
         <>
-          {barns?.map((barn) => (
+          {barns.map((barn) => (
             <div className={classes.barnCard}>
               <BarnCard
                 barnNumber={barn.barnNumber}
