@@ -7,18 +7,9 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "build",
-    "baseUrl": "./",
-    "paths": {
-      "*": [
-        "./node_modules/*"
-      ],
-      "src/*": [
-        "./*"
-      ]
-    }
   },
   "include": [
-    "app/**/*"
+    "**/*"
   ],
   "exclude": [
     "node_modules",

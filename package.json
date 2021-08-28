@@ -4,10 +4,11 @@
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register ./app/index.ts",
-    "build": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register ./build/app/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only ./app/index.ts",
+    "build": "tsc",
+    "start": "node ./build/app/index.js",
     "heroku-prebuild": "cd app/client && npm install && npm run build",
-    "heroku-postbuild": "npm install && npm i --save-dev @types/validator && npm run build"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "author": "Oscar Torres",
   "license": "ISC",

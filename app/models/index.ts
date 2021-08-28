@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "src/database/db";
+import sequelize from "../../database/db";
 import { BarnModelType, LogsModelType } from "../types/modelsTypes";
 
 export const Barn: BarnModelType = sequelize.define('Barn', {
