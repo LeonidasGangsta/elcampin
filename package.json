@@ -1,22 +1,27 @@
 {
-  "name": "elcampin",
+  "name": "elcampinserver",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:fe": "cd ./cliente && npm run build",
-    "start:be": "cd ./server && npm run prod",
-    "build": "npm run start:fe && npm run start:be"
+    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register ./app/index.ts",
+    "build": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register ./build/app/index.js",
+    "heroku-postbuild": "cd app/client && npm install && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LeonidasGangsta/elcampin.git"
-  },
-  "author": "",
+  "author": "Oscar Torres",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LeonidasGangsta/elcampin/issues"
+  "dependencies": {
+    "@types/express": "^4.17.12",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.3.5"
   },
-  "homepage": "https://github.com/LeonidasGangsta/elcampin#readme"
+  "devDependencies": {
+    "@types/validator": "^13.6.3",
+    "tsconfig-paths": "^3.10.1"
+  },
+  "keywords": [],
+  "description": ""
 }
