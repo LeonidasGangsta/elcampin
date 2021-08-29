@@ -1,16 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
+import { BarnsContextProvider } from './context/BarnsContext';
+import BarnDetail from './pages/BarnDetail';
 import Home from './pages/Home';
 
 // eslint-disable-next-line arrow-body-style
 const App = () => {
   return (
     <Router>
-      <NavigationBar />
-      <Switch>
-        <Route path="/" component={Home} exact />
-      </Switch>
+      <BarnsContextProvider>
+        <NavigationBar />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/galpon/:id" component={BarnDetail} exact />
+        </Switch>
+      </BarnsContextProvider>
     </Router>
   );
 };

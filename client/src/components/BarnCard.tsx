@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import theme from 'src/styles/theme';
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
 import { AssessmentRounded, HeightRounded } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import { BarnsType } from 'src/utils/types';
 
 const useStyles = makeStyles({
   root: {
@@ -23,31 +25,30 @@ const useStyles = makeStyles({
 });
 
 type BarnCardProps = {
-  barnNumber: number;
-  chickensInIt: number;
-  maxCapacity: number;
+  barn: BarnsType,
 };
 
-const BarnCard: React.FC<BarnCardProps> = ({
-  barnNumber,
-  chickensInIt,
-  maxCapacity,
-}) => {
+const BarnCard: React.FC<BarnCardProps> = ({ barn }) => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleOpenBarnDetails = () => {
+    history.push(`galpon/${barn.id}`);
+  };
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={handleOpenBarnDetails}>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt="Gallinas en galpon"
           height="140"
           image="/assets/chickens.jpg"
-          title="Contemplative Reptile"
+          title="Gallinas en galpon"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {`Galpon #${barnNumber}`}
+            {`Galpon #${barn.barnNumber}`}
           </Typography>
           <List className={classes.list}>
             <ListItem>
@@ -56,7 +57,7 @@ const BarnCard: React.FC<BarnCardProps> = ({
                   <HeightRounded />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Maxima capacidad de gallinas" secondary={`${maxCapacity} gallinas.`} />
+              <ListItemText primary="Maxima capacidad de gallinas" secondary={`${barn.maxCapacity} gallinas.`} />
             </ListItem>
             <ListItem>
               <ListItemAvatar>
@@ -64,7 +65,7 @@ const BarnCard: React.FC<BarnCardProps> = ({
                   <AssessmentRounded />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Gallinas en el galpon" secondary={`${chickensInIt} gallinas`} />
+              <ListItemText primary="Gallinas en el galpon" secondary={`${barn.chickensInIt} gallinas`} />
             </ListItem>
           </List>
         </CardContent>

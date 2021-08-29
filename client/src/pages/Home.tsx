@@ -1,8 +1,8 @@
-import { CircularProgress, Container, makeStyles } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Container, makeStyles } from '@material-ui/core';
 import BarnCard from 'src/components/BarnCard';
-import { getAllBarns } from 'src/utils/api/barns';
-import { BarnsType } from '../utils/types';
+import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles({
   root: {
@@ -17,33 +17,26 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
-  const [barns, setBarns] = useState<BarnsType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
+  const { isLoading, barns, isDefault } = useBarnsContext();
 
-  const fetchBarns = async () => {
-    const response = await getAllBarns();
-    setBarns(response);
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchBarns();
-  }, []);
+  const SkeletonsCards: React.FC = () => (
+    <>
+      <Skeleton variant="rect" height={418.4} width={338.5} className={classes.barnCard} />
+      <Skeleton variant="rect" height={418.4} width={338.5} className={classes.barnCard} />
+      <Skeleton variant="rect" height={418.4} width={338.5} className={classes.barnCard} />
+    </>
+  );
 
   return (
     <Container className={classes.root}>
-      {isLoading || !barns.length ? (
-        <CircularProgress color="inherit" />
+      {isLoading || isDefault ? (
+        <SkeletonsCards />
       ) : (
         <>
           {barns.map((barn) => (
-            <div className={classes.barnCard}>
-              <BarnCard
-                barnNumber={barn.barnNumber}
-                chickensInIt={barn.chickensInIt}
-                maxCapacity={barn.maxCapacity}
-              />
+            <div key={barn.id} className={classes.barnCard}>
+              <BarnCard barn={barn} />
             </div>
           ))}
         </>

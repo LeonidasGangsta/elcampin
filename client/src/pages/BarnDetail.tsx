@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function VerticalTabs() {
+const BarnDetail = (): JSX.Element => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -99,4 +99,6 @@ export default function VerticalTabs() {
       </TabPanel>
     </div>
   );
-}
+};
+
+export default BarnDetail;
