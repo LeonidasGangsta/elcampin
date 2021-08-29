@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/build/app/index.js",
+    "start:fe": "cd client && npm start",
     "heroku-prebuild": "cd client && npm install && npm run build",
     "heroku-postbuild": "cd server && npm install && npm run build"
   },

@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import MuiTab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import BarnGeneralDetails from 'src/components/BarnsDetails/BarnGeneralDetails';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -11,8 +11,23 @@ interface TabPanelProps {
   value: any;
 }
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
+    minHeight: 224,
+  },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
+  },
+  tabContent: {
+    width: '100%',
+  },
+}));
+
+const TabPanel = ({ children, value, index }: TabPanelProps): JSX.Element => {
+  const classes = useStyles();
 
   return (
     <div
@@ -20,41 +35,47 @@ function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
-      {...other}
+      className={classes.tabContent}
     >
       {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
+      <Box p={3}>
+        {children}
+      </Box>
       )}
     </div>
   );
-}
+};
 
-function a11yProps(index: any) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
+type BarnTabType = { label: string, id: number };
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    display: 'flex',
-    height: 224,
+const BARN_TABS: (BarnTabType & { Component: React.FC })[] = [
+  {
+    id: 0,
+    label: 'Datos generales',
+    Component: BarnGeneralDetails,
   },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
+  {
+    id: 1,
+    label: 'Información del galpon',
+    Component: () => <span>Item Two</span>,
   },
-}));
+  {
+    id: 2,
+    label: 'Información de las gallinas',
+    Component: () => <span>Item Three</span>,
+  },
+  {
+    id: 3,
+    label: 'Eficiencia',
+    Component: () => <span>Item Four</span>,
+  },
+];
 
 const BarnDetail = (): JSX.Element => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
@@ -65,38 +86,18 @@ const BarnDetail = (): JSX.Element => {
         variant="scrollable"
         value={value}
         onChange={handleChange}
-        aria-label="Vertical tabs example"
+        aria-label="Barn details tabs"
         className={classes.tabs}
       >
-        <Tab label="Item One" id="vertical-tab-1" aria-controls="vertical-tabpanel-1" />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
+        {BARN_TABS.map((tab) => (
+          <MuiTab key={`tab__${tab.id}`} label={tab.label} id={`vertical-tab-${tab.id}`} aria-controls={`vertical-tabpanel-${tab.id}`} />
+        ))}
       </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+      {BARN_TABS.map(({ id, Component: TabComponent }) => (
+        <TabPanel key={`tab-component__${id}`} value={value} index={id}>
+          <TabComponent />
+        </TabPanel>
+      ))}
     </div>
   );
 };
