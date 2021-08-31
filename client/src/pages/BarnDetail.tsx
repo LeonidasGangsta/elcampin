@@ -4,6 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import MuiTab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import BarnGeneralDetails from 'src/components/BarnsDetails/BarnGeneralDetails';
+import { useParams } from 'react-router-dom';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -14,7 +15,6 @@ interface TabPanelProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
     display: 'flex',
     minHeight: 224,
   },
@@ -48,7 +48,7 @@ const TabPanel = ({ children, value, index }: TabPanelProps): JSX.Element => {
 
 type BarnTabType = { label: string, id: number };
 
-const BARN_TABS: (BarnTabType & { Component: React.FC })[] = [
+const BARN_TABS: (BarnTabType & { Component: React.FC<{ id: number }> })[] = [
   {
     id: 0,
     label: 'Datos generales',
@@ -73,6 +73,7 @@ const BARN_TABS: (BarnTabType & { Component: React.FC })[] = [
 
 const BarnDetail = (): JSX.Element => {
   const classes = useStyles();
+  const { barnID } = useParams<{ barnID: string }>();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
@@ -95,7 +96,7 @@ const BarnDetail = (): JSX.Element => {
       </Tabs>
       {BARN_TABS.map(({ id, Component: TabComponent }) => (
         <TabPanel key={`tab-component__${id}`} value={value} index={id}>
-          <TabComponent />
+          <TabComponent id={Number(barnID)} />
         </TabPanel>
       ))}
     </div>

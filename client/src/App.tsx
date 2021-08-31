@@ -13,7 +13,7 @@ const App = () => {
         <NavigationBar />
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/galpon/:id" component={BarnDetail} exact />
+          <Route path="/galpon/:barnID" component={BarnDetail} exact />
         </Switch>
       </BarnsContextProvider>
     </Router>

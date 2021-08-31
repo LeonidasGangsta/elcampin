@@ -2,6 +2,9 @@ import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import { getDateInSpanish, getPercentageOfOcupation } from 'src/utils/barnUtils/barnUtils';
+import { BarnsType } from 'src/utils/types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -14,42 +17,54 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const AutoGrid = (): JSX.Element => {
+type BarnGeneralDetailsProps = {
+  id: number,
+};
+
+const BarnGeneralDetails = ({ id }: BarnGeneralDetailsProps): JSX.Element => {
   const classes = useStyles();
+  const { barns } = useBarnsContext();
+  const {
+    maxCapacity,
+    chickensInIt,
+    barnNumber,
+    createdAt,
+    updatedAt,
+  } = barns.find((barn) => barn.id === id) as BarnsType;
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs>
           <Paper className={classes.paper}>
-            xs
+            {`Número del galpon: ${barnNumber}`}
           </Paper>
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            xs
+            {`Creado el ${getDateInSpanish(createdAt)}`}
           </Paper>
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            xs
+            {`Modificado por última vez el ${getDateInSpanish(updatedAt)}`}
           </Paper>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs>
           <Paper className={classes.paper}>
-            xs
-          </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            xs=6
+            {`Maxima capacidad: ${maxCapacity} gallinas`}
           </Paper>
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            xs
+            {`Espacio ocupado: ${chickensInIt} gallinas`}
+          </Paper>
+        </Grid>
+        <Grid item xs>
+          <Paper className={classes.paper}>
+            {`Porcentaje de ocupacion: ${getPercentageOfOcupation(maxCapacity, chickensInIt, 1)} %`}
           </Paper>
         </Grid>
       </Grid>
@@ -57,4 +72,4 @@ const AutoGrid = (): JSX.Element => {
   );
 };
 
-export default AutoGrid;
+export default BarnGeneralDetails;

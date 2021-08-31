@@ -1,8 +1,6 @@
 import sequelize from "../database/db";
 import express from "express";
 import routes from "./routes";
-import { barnsForBD, logsForBD } from "./testingData";
-import { Barn, Log } from "./models";
 import { CLIENT_DIRECTORY } from "../config";
 
 const app = express();
@@ -27,12 +25,12 @@ app.use(logs.route, logs.endpoints);
 
 // Connect to the database
 // Force=true === DROP TABLES
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log('Database was connected succesfully')
 
     // Inject testing data
-    barnsForBD.forEach(async (barn) => {
+    /* barnsForBD.forEach(async (barn) => {
       try {
         const barnCreated = await Barn.create(barn);
         // @ts-expect-error dataValues is a valid property
@@ -40,7 +38,7 @@ sequelize.sync({ force: true })
       } catch (error) {
         console.log(error);
       }
-    })
+    }) */
 
   }).catch((err) => {
     console.error(err);
