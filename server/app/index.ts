@@ -22,6 +22,15 @@ app.use((_req, res, next) => {
 const { barns, logs } = routes;
 app.use(barns.route, barns.endpoints);
 app.use(logs.route, logs.endpoints);
+// In case of no route match
+app.use((req, res) => {
+  if (req.accepts('html')) {
+    res.redirect('/');
+    return;
+  };
+
+  res.status(404).send('Error 404: Page not found');
+})
 
 // Connect to the database
 // Force=true === DROP TABLES
