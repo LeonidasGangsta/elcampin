@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
-import MuiTab from '@material-ui/core/Tab';
+import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import BarnGeneralDetails from 'src/components/BarnsDetails/BarnGeneralDetails';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     display: 'flex',
-    minHeight: 224,
+    minHeight: '100%',
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -46,26 +46,25 @@ const TabPanel = ({ children, value, index }: TabPanelProps): JSX.Element => {
   );
 };
 
-type BarnTabType = { label: string, id: number };
+interface BarnTabsType {
+  label: string,
+  Component: React.FC<{ id: number }>,
+}
 
-const BARN_TABS: (BarnTabType & { Component: React.FC<{ id: number }> })[] = [
+const BARN_TABS: BarnTabsType[] = [
   {
-    id: 0,
     label: 'Datos generales',
     Component: BarnGeneralDetails,
   },
   {
-    id: 1,
     label: 'Información del galpon',
     Component: () => <span>Item Two</span>,
   },
   {
-    id: 2,
     label: 'Información de las gallinas',
     Component: () => <span>Item Three</span>,
   },
   {
-    id: 3,
     label: 'Eficiencia',
     Component: () => <span>Item Four</span>,
   },
@@ -90,12 +89,12 @@ const BarnDetail = (): JSX.Element => {
         aria-label="Barn details tabs"
         className={classes.tabs}
       >
-        {BARN_TABS.map((tab) => (
-          <MuiTab key={`tab__${tab.id}`} label={tab.label} id={`vertical-tab-${tab.id}`} aria-controls={`vertical-tabpanel-${tab.id}`} />
+        {BARN_TABS.map((tab, id) => (
+          <Tab key={`tab__${tab.label}`} label={tab.label} id={`vertical-tab-${id}`} aria-controls={`vertical-tabpanel-${id}`} />
         ))}
       </Tabs>
-      {BARN_TABS.map(({ id, Component: TabComponent }) => (
-        <TabPanel key={`tab-component__${id}`} value={value} index={id}>
+      {BARN_TABS.map(({ Component: TabComponent, label }, id) => (
+        <TabPanel key={`tab-component__${label}`} value={value} index={id}>
           <TabComponent id={Number(barnID)} />
         </TabPanel>
       ))}

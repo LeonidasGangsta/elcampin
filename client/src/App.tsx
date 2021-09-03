@@ -1,5 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import { BarnsContextProvider } from './context/BarnsContext';
 import BarnDetail from './pages/BarnDetail';
