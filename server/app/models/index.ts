@@ -20,6 +20,7 @@ export const Barn: BarnModelType = sequelize.define('Barn', {
   },
   chickensInIt: {
     type: DataTypes.INTEGER,
+    allowNull: false,
     validate: {
       lessThanMaxQuantity(value: number) {
         if (value > this.maxCapacity) {
