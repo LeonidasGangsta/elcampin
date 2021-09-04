@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,6 +12,7 @@ import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@material-
 import { AssessmentRounded, HeightRounded } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { BarnsType } from 'src/utils/types';
+import BarnDrawer from './BarnDrawer';
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +32,15 @@ type BarnCardProps = {
 const BarnCard: React.FC<BarnCardProps> = ({ barn }) => {
   const classes = useStyles();
   const history = useHistory();
+  const [isShowingDrawer, setIsShowingDrawer] = useState(false);
+
+  const handleEditBarn = () => {
+    setIsShowingDrawer(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setIsShowingDrawer(false);
+  };
 
   const handleOpenBarnDetails = () => {
     history.push(`galpon/${barn.id}`);
@@ -71,9 +81,10 @@ const BarnCard: React.FC<BarnCardProps> = ({ barn }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={handleEditBarn}>
           Editar galpon
         </Button>
+        <BarnDrawer open={isShowingDrawer} onClose={handleCloseDrawer} barnToEdit={barn} />
       </CardActions>
     </Card>
   );

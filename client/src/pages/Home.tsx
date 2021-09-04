@@ -3,7 +3,7 @@ import { Button, Container, makeStyles } from '@material-ui/core';
 import BarnCard from 'src/components/BarnCard';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 import { Skeleton } from '@material-ui/lab';
-import CreateBarnDrawer from 'src/components/CreateBarnDrawer';
+import BarnDrawer from 'src/components/BarnDrawer';
 
 const useStyles = makeStyles({
   root: {
@@ -72,7 +72,7 @@ const Home = () => {
       >
         Crear un nuevo galpon
       </Button>
-      <CreateBarnDrawer open={showingBarnForm} onClose={onCloseShowingBarnForm} />
+      <BarnDrawer open={showingBarnForm} onClose={onCloseShowingBarnForm} />
     </Container>
   );
 };

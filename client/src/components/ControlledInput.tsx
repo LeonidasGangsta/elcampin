@@ -13,6 +13,7 @@ interface CustomInputProps {
   helperText?: string,
   defaultErrorMessage?: string,
   externalClass?: string,
+  disabled?: boolean,
 }
 
 const ControlledInput = ({
@@ -26,6 +27,7 @@ const ControlledInput = ({
   helperText,
   defaultErrorMessage,
   externalClass,
+  disabled,
 }: CustomInputProps): JSX.Element => (
   <Controller
     name={name}
@@ -45,6 +47,7 @@ const ControlledInput = ({
         className={externalClass}
         error={Boolean(error?.type)}
         helperText={error ? (error?.message || defaultErrorMessage) : helperText}
+        disabled={disabled}
       />
     )}
   />

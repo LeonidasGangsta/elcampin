@@ -32,6 +32,15 @@ export const httpHelper = {
       throw error;
     }
   },
+  patch: async (url: string, params?: ParamsType) => {
+    try {
+      const response = await axios.patch(`${API_URL}${url}`, params);
+      return dataExtractor(response);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
   delete: async (url: string, params?: ParamsType) => {
     try {
       const response = await axios.delete(`${API_URL}${url}`, params);
