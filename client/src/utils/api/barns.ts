@@ -1,4 +1,4 @@
-import { BarnsType } from '../types';
+import { BarnsType, CreateBarnType } from '../types';
 import { httpHelper } from './httpHelper';
 
 export const getAllBarns = async () => {
@@ -10,4 +10,10 @@ export const getAllBarns = async () => {
   } catch (error) {
     return [];
   }
+};
+
+export const createANewBarn = async (params: CreateBarnType) => {
+  const { data } = await httpHelper.post('/barns/create', { barn: params });
+  const barnCreated = data?.barn;
+  return barnCreated;
 };

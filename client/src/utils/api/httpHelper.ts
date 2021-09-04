@@ -9,8 +9,12 @@ const dataExtractor = (axiosPromise: AxiosResponse) => ({
   statusText: axiosPromise.statusText,
 });
 
+interface ParamsType {
+  readonly [key: string]: string | number | object
+}
+
 export const httpHelper = {
-  get: async (url: string, params?: { [key: string]: string }) => {
+  get: async (url: string, params?: ParamsType) => {
     try {
       const response = await axios.get(`${API_URL}${url}`, params);
       return dataExtractor(response);
@@ -19,7 +23,7 @@ export const httpHelper = {
       throw error;
     }
   },
-  post: async (url: string, params?: { [key: string]: string }) => {
+  post: async (url: string, params?: ParamsType) => {
     try {
       const response = await axios.post(`${API_URL}${url}`, params);
       return dataExtractor(response);
@@ -28,7 +32,7 @@ export const httpHelper = {
       throw error;
     }
   },
-  delete: async (url: string, params?: { [key: string]: string }) => {
+  delete: async (url: string, params?: ParamsType) => {
     try {
       const response = await axios.delete(`${API_URL}${url}`, params);
       return dataExtractor(response);

@@ -6,3 +6,9 @@ export interface BarnsType {
   createdAt: string,
   updatedAt: string,
 }
+
+export type CreateBarnType = {
+  barnNumber: number,
+  maxCapacity: number,
+  chickensInIt: number,
+};
