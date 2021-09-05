@@ -27,7 +27,7 @@ interface LogsListProps {
   barnId?: string | number,
 }
 
-const LogsList = ({ logs, barnId }: LogsListProps): JSX.Element => {
+const LogsList = ({ logs }: LogsListProps): JSX.Element => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(1);
   const classes = useStyles();
