@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 interface LogsListProps {
   logs: LogsType[],
-  barnId?: string | number,
+  // barnId?: string | number,
 }
 
 const LogsList = ({ logs }: LogsListProps): JSX.Element => {
