@@ -12,3 +12,13 @@ export type CreateBarnType = {
   maxCapacity: number,
   chickensInIt: number,
 };
+
+export interface LogsType {
+  id: number,
+  BarnId: number,
+  eggs: number,
+  date: string,
+  chickensInIt?: number,
+  createdAt: string,
+  updatedAt: string,
+}

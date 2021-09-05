@@ -4,6 +4,7 @@ import BarnCard from 'src/components/BarnCard';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 import { Skeleton } from '@material-ui/lab';
 import BarnDrawer from 'src/components/BarnDrawer';
+import LogsList from 'src/components/LogsList';
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
-  const { isLoading, barns, isDefault } = useBarnsContext();
+  const { isLoading, barns, logs, isDefault } = useBarnsContext();
   const [showingBarnForm, setShowingBarnForm] = useState(false);
 
   const handleCreateNewBarn = () => {
@@ -72,6 +73,7 @@ const Home = () => {
       >
         Crear un nuevo galpon
       </Button>
+      <LogsList logs={logs} />
       <BarnDrawer open={showingBarnForm} onClose={onCloseShowingBarnForm} />
     </Container>
   );

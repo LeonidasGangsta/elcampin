@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { makeStyles, Drawer, Button } from '@material-ui/core';
 import { BarnsType, CreateBarnType } from 'src/utils/types';
 import { createANewBarn, deleteABarn, updateABarn } from 'src/utils/api/barns';
-import { barnHooks } from 'src/utils/hooks/barnHooks';
+import { barnHooks } from 'src/hooks/barnHooks';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 import { getNumberInputRules } from 'src/utils/barnUtils/barnUtils';
 import ControlledInput from './ControlledInput';
@@ -35,7 +35,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
   const { validateNewBarnNumber, findNextBarnNumber } = barnHooks();
-  const { updateBarnsContext } = useBarnsContext();
+  const { updateBarnsContext, barns } = useBarnsContext();
   const { control, handleSubmit, watch } = useForm<CreateBarnType>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -76,10 +76,9 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
     try {
       if (barnToEdit) {
         const barnDeleted = await deleteABarn(barnToEdit.id);
-        updateBarnsContext((prev) => ({
-          ...prev,
-          barns: prev.barns.filter(({ id }) => id !== barnToEdit.id),
-        }));
+        updateBarnsContext({
+          barns: barns.filter(({ id }) => id !== barnToEdit.id),
+        });
         return barnDeleted;
       }
       throw Error('An error ocurred deleting the barn');
@@ -97,13 +96,12 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
         ? await updateABarn(barnToEdit.id, barnToCreateOrUpdate)
         : await createANewBarn(barnToCreateOrUpdate);
 
-      updateBarnsContext((prev) => ({
-        ...prev,
+      updateBarnsContext({
         barns: [
-          ...prev.barns.filter(({ id }) => id !== barnCreatedOrUpdated.id),
+          ...barns.filter(({ id }) => id !== barnCreatedOrUpdated.id),
           barnCreatedOrUpdated,
         ].sort((aBarn, bBarn) => aBarn.barnNumber - bBarn.barnNumber),
-      }));
+      });
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error);

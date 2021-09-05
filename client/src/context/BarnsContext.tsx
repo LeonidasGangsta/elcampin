@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { getAllBarns } from 'src/utils/api/barns';
 import { BarnsType } from 'src/utils/types';
 import { Backdrop, CircularProgress, makeStyles } from '@material-ui/core';
+import { getAllLogs } from 'src/utils/api/logs';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -15,13 +16,15 @@ interface BarnContextInterface {
   isDefault: boolean,
   isLoading: boolean,
   barns: BarnsType[],
-  updateBarnsContext: React.Dispatch<React.SetStateAction<BarnContextInterface>>,
+  logs: any[],
+  updateBarnsContext: (partialContext: Partial<BarnContextInterface>) => void,
 }
 
 const initialStateContext: BarnContextInterface = {
   isDefault: true,
   isLoading: true,
   barns: [],
+  logs: [],
   updateBarnsContext: () => {},
 };
 
@@ -29,23 +32,32 @@ export const BarnsContext = createContext(initialStateContext);
 
 export const BarnsContextProvider: React.FC = ({ children }) => {
   const [contextValue, setContextValue] = useState<BarnContextInterface>(initialStateContext);
+  const handleUpdateContext = (partialContext: Partial<BarnContextInterface>) => (
+    setContextValue((prev) => ({
+      ...prev,
+      partialContext,
+    }))
+  );
   const classes = useStyles();
   const history = useHistory();
 
   const fetchBarns = async () => {
     try {
-      const response = await getAllBarns();
+      const barnsResponse = await getAllBarns();
+      const logsResponse = await getAllLogs();
+
       setContextValue({
-        barns: response,
+        barns: barnsResponse,
+        logs: logsResponse,
         isDefault: false,
         isLoading: false,
-        updateBarnsContext: setContextValue,
+        updateBarnsContext: handleUpdateContext,
       });
     } catch (error) {
       setContextValue({
         ...initialStateContext,
         isLoading: false,
-        updateBarnsContext: setContextValue,
+        updateBarnsContext: handleUpdateContext,
       });
     }
   };
