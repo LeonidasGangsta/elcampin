@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { makeStyles, Drawer, Button } from '@material-ui/core';
+import { makeStyles, Drawer, Button, Modal } from '@material-ui/core';
 import { BarnsType, CreateBarnType } from 'src/utils/types';
 import { createANewBarn, deleteABarn, updateABarn } from 'src/utils/api/barns';
 import { barnHooks } from 'src/hooks/barnHooks';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 import { getNumberInputRules } from 'src/utils/barnUtils/barnUtils';
 import ControlledInput from './ControlledInput';
+import AlertBar from './AlertBar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,15 @@ const useStyles = makeStyles((theme) => ({
   input: {
     width: '100%',
   },
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  alert: {
+    width: '80%',
+    maxWidth: `${600 / 16}rem`,
+  },
 }));
 
 interface BarnDrawerProps {
@@ -34,6 +44,7 @@ interface BarnDrawerProps {
 const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
   const { validateNewBarnNumber, findNextBarnNumber } = barnHooks();
   const { updateBarnsContext, barns } = useBarnsContext();
   const { control, handleSubmit, watch } = useForm<CreateBarnType>({
@@ -72,13 +83,21 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
     },
   });
 
+  const handleCloseNotificationBar = () => {
+    setAlertMessage('');
+    setIsLoading(false);
+    onClose();
+  };
+
   const handleDeleteBarn = async () => {
     try {
+      setIsLoading(true);
       if (barnToEdit) {
         const barnDeleted = await deleteABarn(barnToEdit.id);
         updateBarnsContext({
           barns: barns.filter(({ id }) => id !== barnToEdit.id),
         });
+        setAlertMessage('Galpon eliminado exitosamente.');
         return barnDeleted;
       }
       throw Error('An error ocurred deleting the barn');
@@ -102,12 +121,10 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
           barnCreatedOrUpdated,
         ].sort((aBarn, bBarn) => aBarn.barnNumber - bBarn.barnNumber),
       });
+      setAlertMessage('Galpon editado exitosamente.');
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error);
-    } finally {
-      setIsLoading(false);
-      onClose();
     }
   };
 
@@ -157,6 +174,15 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
           </Button>
         )}
       </form>
+      <Modal
+        className={classes.modal}
+        open={Boolean(alertMessage)}
+        onClose={handleCloseNotificationBar}
+      >
+        <AlertBar title="Cambio exitoso" externalClass={classes.alert} severity="success" onClose={handleCloseNotificationBar}>
+          {alertMessage}
+        </AlertBar>
+      </Modal>
     </Drawer>
   );
 };
