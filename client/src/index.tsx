@@ -4,7 +4,7 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import theme from './styles/theme';
-import './index.scss';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
