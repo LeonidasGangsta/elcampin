@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { makeStyles, Drawer, Button, Modal } from '@material-ui/core';
 import { BarnsType, CreateBarnType } from 'src/utils/types';
