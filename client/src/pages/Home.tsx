@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Container } from '@mui/material';
+import { Button, Container, Skeleton } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import BarnCard from 'src/components/BarnCard';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
-import { Skeleton } from '@mui/material';
+
 import BarnDrawer from 'src/components/BarnDrawer';
 import LogsList from 'src/components/LogsList';
 

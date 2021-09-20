@@ -40,7 +40,8 @@ const NavigationBar = () => {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-            size="large">
+            size="large"
+          >
             <Home />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
