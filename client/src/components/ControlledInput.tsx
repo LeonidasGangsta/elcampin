@@ -1,6 +1,6 @@
 import React from 'react';
 import { Control, Controller, RegisterOptions } from 'react-hook-form';
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 
 interface CustomInputProps {
   name: string,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableRow,
   TablePagination,
   Paper,
-} from '@material-ui/core';
+} from '@mui/material';
 import { LogsType } from 'src/utils/types';
 
 const useStyles = makeStyles({

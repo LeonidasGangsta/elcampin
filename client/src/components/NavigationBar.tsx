@@ -1,12 +1,14 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import { useHistory } from 'react-router-dom';
-import { Home } from '@material-ui/icons';
+import { Home } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -32,7 +34,13 @@ const NavigationBar = () => {
     <div className={classes.root}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <IconButton edge="start" onClick={handleLinkToHome} className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton
+            edge="start"
+            onClick={handleLinkToHome}
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            size="large">
             <Home />
           </IconButton>
           <Typography variant="h6" className={classes.title}>

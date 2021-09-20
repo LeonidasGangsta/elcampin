@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 import BarnGeneralDetails from 'src/components/BarnsDetails/BarnGeneralDetails';
 import { useParams } from 'react-router-dom';
 

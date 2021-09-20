@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { makeStyles, Drawer, Button, Modal } from '@material-ui/core';
+import { Drawer, Button, Modal } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { BarnsType, CreateBarnType } from 'src/utils/types';
 import { createANewBarn, deleteABarn, updateABarn } from 'src/utils/api/barns';
 import { barnHooks } from 'src/hooks/barnHooks';

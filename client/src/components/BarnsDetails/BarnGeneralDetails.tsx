@@ -1,7 +1,9 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 import { getDateInSpanish, getPercentageOfOcupation } from 'src/utils/barnUtils/barnUtils';
 import { BarnsType } from 'src/utils/types';

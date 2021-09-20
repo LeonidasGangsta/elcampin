@@ -2,7 +2,8 @@ import React, { createContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getAllBarns } from 'src/utils/api/barns';
 import { BarnsType } from 'src/utils/types';
-import { Backdrop, CircularProgress, makeStyles } from '@material-ui/core';
+import { Backdrop, CircularProgress } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { getAllLogs } from 'src/utils/api/logs';
 
 const useStyles = makeStyles((theme) => ({

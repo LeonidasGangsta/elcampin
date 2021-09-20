@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Container, makeStyles } from '@material-ui/core';
+import { Button, Container } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import BarnCard from 'src/components/BarnCard';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
-import { Skeleton } from '@material-ui/lab';
+import { Skeleton } from '@mui/material';
 import BarnDrawer from 'src/components/BarnDrawer';
 import LogsList from 'src/components/LogsList';
 
@@ -46,9 +47,9 @@ const Home = () => {
 
   const SkeletonsCards: React.FC = () => (
     <>
-      <Skeleton variant="rect" height={418.4} width={338.5} className={classes.barnCard} />
-      <Skeleton variant="rect" height={418.4} width={338.5} className={classes.barnCard} />
-      <Skeleton variant="rect" height={418.4} width={338.5} className={classes.barnCard} />
+      <Skeleton variant="rectangular" height={418.4} width={338.5} className={classes.barnCard} />
+      <Skeleton variant="rectangular" height={418.4} width={338.5} className={classes.barnCard} />
+      <Skeleton variant="rectangular" height={418.4} width={338.5} className={classes.barnCard} />
     </>
   );
 
