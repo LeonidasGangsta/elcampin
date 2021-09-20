@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Container, Skeleton } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import { useHistory } from 'react-router-dom';
 import BarnCard from 'src/components/BarnCard';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 
@@ -34,6 +35,7 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
+  const history = useHistory();
   const { isLoading, barns, logs, isDefault } = useBarnsContext();
   const [showingBarnForm, setShowingBarnForm] = useState(false);
 
@@ -43,6 +45,10 @@ const Home = () => {
 
   const onCloseShowingBarnForm = () => {
     setShowingBarnForm(false);
+  };
+
+  const handleCreateNewRecord = () => {
+    history.push('/recogida/nueva');
   };
 
   const SkeletonsCards: React.FC = () => (
@@ -76,6 +82,14 @@ const Home = () => {
       </Button>
       <LogsList logs={logs} />
       <BarnDrawer open={showingBarnForm} onClose={onCloseShowingBarnForm} />
+      <Button
+        variant="outlined"
+        color="secondary"
+        className={classes.button}
+        onClick={handleCreateNewRecord}
+      >
+        Nueva recogida de huevos
+      </Button>
     </Container>
   );
 };
