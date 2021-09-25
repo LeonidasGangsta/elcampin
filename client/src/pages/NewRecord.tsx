@@ -2,7 +2,7 @@ import React from 'react';
 import {
   styled,
 } from '@mui/material';
-import { useForm, RegisterOptions } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import ControlledInput from 'src/components/ControlledInput';
 
 interface FormData {
@@ -11,7 +11,7 @@ interface FormData {
   eggs: number,
 }
 
-const Form = styled('form')(({ theme }) => ({
+const Form = styled('form')(() => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
