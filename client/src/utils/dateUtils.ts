@@ -2,6 +2,8 @@ export const getLogDateInSpanish = (date: string | Date) => new Date(date).toLoc
 
 export const getBarnDateInSpanish = (dateInIsoString: string | Date) => {
   const date = new Date(dateInIsoString);
-  const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' };
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric',
+  };
   return date.toLocaleDateString('es-ES', options);
 };

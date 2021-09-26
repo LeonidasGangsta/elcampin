@@ -8,7 +8,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import theme from 'src/styles/theme';
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import {
+  Avatar, List, ListItem, ListItemAvatar, ListItemText,
+} from '@mui/material';
 import { AssessmentRounded, HeightRounded } from '@mui/icons-material';
 import { useHistory } from 'react-router-dom';
 import { BarnsType } from 'src/utils/types';

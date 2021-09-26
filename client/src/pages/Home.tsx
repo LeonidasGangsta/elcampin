@@ -36,7 +36,9 @@ const useStyles = makeStyles({
 const Home = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { isLoading, barns, logs, isDefault } = useBarnsContext();
+  const {
+    isLoading, barns, logs, isDefault,
+  } = useBarnsContext();
   const [showingBarnForm, setShowingBarnForm] = useState(false);
 
   const handleCreateNewBarn = () => {
