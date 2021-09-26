@@ -23,3 +23,10 @@ export interface LogsType {
   createdAt: string,
   updatedAt: string,
 }
+
+export type CreateLogType = {
+  date: string,
+  eggs: number,
+  chickensInIt: number,
+  barnID: number,
+};

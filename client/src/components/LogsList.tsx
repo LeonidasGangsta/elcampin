@@ -67,7 +67,7 @@ const LogsList = ({ logs }: LogsListProps): JSX.Element => {
                 {`${log.eggs} recogidos`}
               </TableCell>
               <TableCell align="right">{getLogDateInSpanish(log.date)}</TableCell>
-              <TableCell align="right">{log.Barn.barnNumber}</TableCell>
+              <TableCell align="right">{log.Barn?.barnNumber}</TableCell>
               <TableCell align="right">{log.chickensInIt}</TableCell>
               <TableCell align="right">{getLogDateInSpanish(log.createdAt)}</TableCell>
             </TableRow>
