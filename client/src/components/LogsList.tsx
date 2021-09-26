@@ -29,7 +29,7 @@ interface LogsListProps {
 
 const LogsList = ({ logs }: LogsListProps): JSX.Element => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const classes = useStyles();
   const showingLogs = React.useMemo(() => (
     logs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -65,8 +65,8 @@ const LogsList = ({ logs }: LogsListProps): JSX.Element => {
               <TableCell component="th" scope="row">
                 {`${log.eggs} recogidos`}
               </TableCell>
-              <TableCell align="right">{log.date}</TableCell>
-              <TableCell align="right">{log.BarnId}</TableCell>
+              <TableCell align="right">{new Date(log.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</TableCell>
+              <TableCell align="right">{log.Barn.barnNumber}</TableCell>
               <TableCell align="right">{log.chickensInIt}</TableCell>
               <TableCell align="right">{log.createdAt}</TableCell>
             </TableRow>

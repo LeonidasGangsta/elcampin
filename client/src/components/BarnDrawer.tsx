@@ -47,7 +47,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const { validateNewBarnNumber, findNextBarnNumber } = barnHooks();
-  const { updateBarnsContext, barns } = useBarnsContext();
+  const { refreshState } = useBarnsContext();
   const { control, handleSubmit, watch } = useForm<CreateBarnType>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -95,9 +95,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       setIsLoading(true);
       if (barnToEdit) {
         const barnDeleted = await deleteABarn(barnToEdit.id);
-        updateBarnsContext({
-          barns: barns.filter(({ id }) => id !== barnToEdit.id),
-        });
+        refreshState();
         setAlertMessage('Galpon eliminado exitosamente.');
         return barnDeleted;
       }
@@ -116,16 +114,13 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
         ? await updateABarn(barnToEdit.id, barnToCreateOrUpdate)
         : await createANewBarn(barnToCreateOrUpdate);
 
-      updateBarnsContext({
-        barns: [
-          ...barns.filter(({ id }) => id !== barnCreatedOrUpdated.id),
-          barnCreatedOrUpdated,
-        ].sort((aBarn, bBarn) => aBarn.barnNumber - bBarn.barnNumber),
-      });
+      refreshState();
       setAlertMessage('Galpon editado exitosamente.');
+      return barnCreatedOrUpdated;
     } catch (error) {
       // eslint-disable-next-line no-alert
       alert(error);
+      return null;
     }
   };
 

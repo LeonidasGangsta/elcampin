@@ -73,6 +73,11 @@ BarnsEndpoints.delete('/delete/:BarnID', async ({ params: { BarnID } }, res) => 
   try {
     const barnToDelete = await Barn.findByPk(BarnID as string);
     if (!barnToDelete) throw (`No barn with ID: ${BarnID} was found to delete`);
+    await Log.destroy({
+      where: {
+        BarnId: BarnID,
+      }
+    });
     await barnToDelete.destroy();
     res.send({ message: `Barn successfully deleted.`, barnDeleted: barnToDelete })
   } catch (error) {

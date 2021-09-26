@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { getAllBarns } from 'src/utils/api/barns';
 import { BarnsType } from 'src/utils/types';
 import { Backdrop, CircularProgress } from '@mui/material';
@@ -19,6 +18,7 @@ interface BarnContextInterface {
   barns: BarnsType[],
   logs: any[],
   updateBarnsContext: (partialContext: Partial<BarnContextInterface>) => void,
+  refreshState: () => void,
 }
 
 const initialStateContext: BarnContextInterface = {
@@ -27,6 +27,7 @@ const initialStateContext: BarnContextInterface = {
   barns: [],
   logs: [],
   updateBarnsContext: () => {},
+  refreshState: () => {},
 };
 
 export const BarnsContext = createContext(initialStateContext);
@@ -40,9 +41,8 @@ export const BarnsContextProvider: React.FC = ({ children }) => {
     }))
   );
   const classes = useStyles();
-  const history = useHistory();
 
-  const fetchBarns = async () => {
+  const fetchBarnsAndLogs = async () => {
     try {
       const barnsResponse = await getAllBarns();
       const logsResponse = await getAllLogs();
@@ -53,19 +53,20 @@ export const BarnsContextProvider: React.FC = ({ children }) => {
         isDefault: false,
         isLoading: false,
         updateBarnsContext: handleUpdateContext,
+        refreshState: fetchBarnsAndLogs,
       });
     } catch (error) {
       setContextValue({
         ...initialStateContext,
         isLoading: false,
         updateBarnsContext: handleUpdateContext,
+        refreshState: fetchBarnsAndLogs,
       });
     }
   };
 
   useEffect(() => {
-    history.push('/');
-    fetchBarns();
+    fetchBarnsAndLogs();
   }, []);
 
   return (

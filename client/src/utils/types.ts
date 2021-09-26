@@ -16,6 +16,7 @@ export type CreateBarnType = {
 export interface LogsType {
   id: number,
   BarnId: number,
+  Barn: BarnsType,
   eggs: number,
   date: string,
   chickensInIt?: number,

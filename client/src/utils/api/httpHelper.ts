@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios, { AxiosResponse } from 'axios';
 
-const API_URL = 'https://elcampin.herokuapp.com';
+const API_URL = process.env.REACT_APP_API_URL || 'https://elcampin.herokuapp.com';
 
 const dataExtractor = (axiosPromise: AxiosResponse) => ({
   data: axiosPromise.data,
