@@ -1,11 +1,15 @@
 import express from 'express';
-import { Log } from '../models';
+import { Barn, Log } from '../models';
 const LogsEndpoints = express.Router();
 
 // Get a list of All Logs
 LogsEndpoints.get('/', async (_req, res) => {
   try {
-    const barns = await Log.findAll();
+    const barns = await Log.findAll({
+      include: {
+        model: Barn,
+      }
+    });
     res.send(barns);
   } catch (error) {
     res.send(error);
