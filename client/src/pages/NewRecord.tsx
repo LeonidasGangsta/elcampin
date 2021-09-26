@@ -1,16 +1,21 @@
 import React from 'react';
 import {
+  Button as MuiButton,
+  MenuItem,
   styled,
+  Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import ControlledInput from 'src/components/ControlledInput';
 import { createNewLog } from 'src/utils/api/logs';
-import { CreateLogType } from 'src/utils/types';
+import { BarnsType, CreateLogType } from 'src/utils/types';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 import { useHistory } from 'react-router-dom';
+import ControlledSelect from 'src/components/ControlledSelect';
+import { eggsFromTakeRules, getSelectBarnRules, rulesForTakesDate } from 'src/utils/logUtils';
 
 interface FormData {
-  barnNumber: string,
+  barnID: string,
   dateOfTake: string,
   eggs: string,
 }
@@ -19,13 +24,28 @@ const Form = styled('form')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  alignItems: 'flex-start',
+  alignItems: 'center',
   margin: theme.spacing(4),
 }));
 
 const Input = styled(ControlledInput)(({ theme }) => ({
-  margin: theme.spacing(2),
-  border: '1px solid blue',
+  margin: `${theme.spacing(2)} 0`,
+  width: '100%',
+  maxWidth: '25rem',
+}));
+
+const Select = styled(ControlledSelect)(({ theme }) => ({
+  margin: `${theme.spacing(2)} 0`,
+  width: '100%',
+  maxWidth: '25rem',
+}));
+
+const Button = styled(MuiButton)(({ theme }) => ({
+  margin: `${theme.spacing(2)} 0`,
+  width: '100%',
+  maxWidth: '25rem',
+  padding: '0.5rem 0.25rem',
+  fontWeight: 600,
 }));
 
 const NewRecord = () => {
@@ -39,13 +59,9 @@ const NewRecord = () => {
   })();
 
   const onSubmit = handleSubmit(async (data) => {
-    const barnRelated = barns.find((barn) => barn.barnNumber === Number(data.barnNumber));
-    if (!barnRelated) {
-      alert('No se encontro un galpon con ese número');
-      return null;
-    }
+    const barnRelated = barns.find((barn) => barn.id === Number(data.barnID)) as BarnsType;
     const newLog: CreateLogType = {
-      barnID: barnRelated.id,
+      barnID: Number(data.barnID),
       chickensInIt: barnRelated.chickensInIt,
       date: data.dateOfTake,
       eggs: Number(data.eggs),
@@ -64,35 +80,48 @@ const NewRecord = () => {
 
   return (
     <Form onSubmit={onSubmit}>
-      <Input
+      <Typography>
+        Vamos a agregar un nuevo registro de recogida
+      </Typography>
+      <Select
         control={control}
-        name="barnNumber"
-        type="number"
-        helperText="Ingresa el galpon donde se recogieron"
+        name="barnID"
         label="Galpon de recogida"
         variant="outlined"
-      />
+        rules={getSelectBarnRules(barns)}
+      >
+        {barns.map((barn) => (
+          <MenuItem key={barn.id} value={barn.id}>
+            {barn.barnNumber}
+          </MenuItem>
+        ))}
+      </Select>
       <Input
         control={control}
         name="dateOfTake"
         type="date"
-        helperText="¿En que fecha se hizó la recogida?"
         label="Fecha de recolección"
         variant="outlined"
         defaultValue={initialDate}
-        disabled
+        defaultErrorMessage="Por favor ingresa una fecha pasada o actual"
+        rules={rulesForTakesDate}
       />
       <Input
         control={control}
         name="eggs"
         type="number"
-        helperText="¿Cuantos huevos se recogieron?"
         label="Huevos recogidos"
         variant="outlined"
+        defaultErrorMessage="Asegurate de escribir una cantidad positiva y entera de huevos"
+        rules={eggsFromTakeRules}
       />
-      <button type="submit">
-        Enviar
-      </button>
+      <Button
+        variant="outlined"
+        color="secondary"
+        type="submit"
+      >
+        Guardar nuevo registro
+      </Button>
     </Form>
   );
 };

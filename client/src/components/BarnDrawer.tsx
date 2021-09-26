@@ -6,7 +6,7 @@ import { BarnsType, CreateBarnType } from 'src/utils/types';
 import { createANewBarn, deleteABarn, updateABarn } from 'src/utils/api/barns';
 import { barnHooks } from 'src/hooks/barnHooks';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
-import { getNumberInputRules } from 'src/utils/barnUtils/barnUtils';
+import { getNumberInputRules } from 'src/utils/barnUtils';
 import ControlledInput from './ControlledInput';
 import AlertBar from './AlertBar';
 
@@ -75,6 +75,9 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
 
   const maxCapacityRules = getNumberInputRules({
     requiredMessage: 'Es necesario asignar la capacidad maxima de gallinas al galpon',
+    validateFunctions: {
+      moreThanOneChicken: (value) => Number(value) > 0,
+    },
   });
 
   const chickensInItRules = getNumberInputRules({
@@ -124,6 +127,8 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       // eslint-disable-next-line no-alert
       alert(error);
       return null;
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -133,7 +138,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
         <ControlledInput
           name="barnNumber"
           control={control}
-          externalClass={classes.input}
+          className={classes.input}
           defaultValue={defaultValues.barnNumber}
           label="Número del galpon"
           rules={barnNumberRules}
@@ -145,7 +150,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
         <ControlledInput
           name="maxCapacity"
           control={control}
-          externalClass={classes.input}
+          className={classes.input}
           defaultValue={defaultValues.maxCapacity}
           label="Capacidad maxima del galpon"
           rules={maxCapacityRules}
@@ -156,7 +161,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
         <ControlledInput
           name="chickensInIt"
           control={control}
-          externalClass={classes.input}
+          className={classes.input}
           defaultValue={defaultValues.chickensInIt}
           label="Gallinas en el galpon"
           rules={chickensInItRules}

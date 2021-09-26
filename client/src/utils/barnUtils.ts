@@ -1,12 +1,12 @@
 import { RegisterOptions } from 'react-hook-form';
-import { NUMBER_REGEX, validatePositiveNumber } from '../constants';
+import { NUMBER_REGEX, validatePositiveNumber } from './constants';
 
 interface NumberInputRulesParams {
   validateFunctions?: Record<string, (value: string | number) => boolean>,
   requiredMessage?: string,
 }
 
-export const getPercentageOfOcupation = (maximumCapacity: number, usage: number, decimals = 2) => (
+export const getPercentageOfOccupation = (maximumCapacity: number, usage: number, decimals = 2) => (
   ((usage / maximumCapacity) * 100).toFixed(decimals)
 );
 
