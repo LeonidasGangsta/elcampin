@@ -61,6 +61,11 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
     maxCapacity: barnToEdit?.maxCapacity || 0,
   };
 
+  const handleOnClose = () => {
+    refreshState();
+    onClose();
+  };
+
   const barnNumberRules = getNumberInputRules({
     validateFunctions: {
       validateNewBarnNumber: isEditing ? () => true : validateNewBarnNumber,
@@ -87,7 +92,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
   const handleCloseNotificationBar = () => {
     setAlertMessage('');
     setIsLoading(false);
-    onClose();
+    handleOnClose();
   };
 
   const handleDeleteBarn = async () => {
@@ -95,7 +100,6 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       setIsLoading(true);
       if (barnToEdit) {
         const barnDeleted = await deleteABarn(barnToEdit.id);
-        refreshState();
         setAlertMessage('Galpon eliminado exitosamente.');
         return barnDeleted;
       }
@@ -114,7 +118,6 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
         ? await updateABarn(barnToEdit.id, barnToCreateOrUpdate)
         : await createANewBarn(barnToCreateOrUpdate);
 
-      refreshState();
       setAlertMessage('Galpon editado exitosamente.');
       return barnCreatedOrUpdated;
     } catch (error) {
@@ -125,7 +128,7 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
   };
 
   return (
-    <Drawer open={open} onClose={onClose} anchor="right">
+    <Drawer open={open} onClose={handleOnClose} anchor="right">
       <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
         <ControlledInput
           name="barnNumber"

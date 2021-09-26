@@ -12,6 +12,7 @@ import {
   Paper,
 } from '@mui/material';
 import { LogsType } from 'src/utils/types';
+import { getLogDateInSpanish } from 'src/utils/dateUtils';
 
 const useStyles = makeStyles({
   root: {
@@ -65,10 +66,10 @@ const LogsList = ({ logs }: LogsListProps): JSX.Element => {
               <TableCell component="th" scope="row">
                 {`${log.eggs} recogidos`}
               </TableCell>
-              <TableCell align="right">{new Date(log.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</TableCell>
+              <TableCell align="right">{getLogDateInSpanish(log.date)}</TableCell>
               <TableCell align="right">{log.Barn.barnNumber}</TableCell>
               <TableCell align="right">{log.chickensInIt}</TableCell>
-              <TableCell align="right">{log.createdAt}</TableCell>
+              <TableCell align="right">{getLogDateInSpanish(log.createdAt)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

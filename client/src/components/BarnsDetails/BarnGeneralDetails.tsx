@@ -5,7 +5,8 @@ import createStyles from '@mui/styles/createStyles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
-import { getDateInSpanish, getPercentageOfOcupation } from 'src/utils/barnUtils/barnUtils';
+import { getPercentageOfOcupation } from 'src/utils/barnUtils/barnUtils';
+import { getBarnDateInSpanish } from 'src/utils/dateUtils';
 import { BarnsType } from 'src/utils/types';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -44,12 +45,12 @@ const BarnGeneralDetails = ({ id }: BarnGeneralDetailsProps): JSX.Element => {
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            {`Creado el ${getDateInSpanish(createdAt)}`}
+            {`Creado el ${getBarnDateInSpanish(createdAt)}`}
           </Paper>
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            {`Modificado por última vez el ${getDateInSpanish(updatedAt)}`}
+            {`Modificado por última vez el ${getBarnDateInSpanish(updatedAt)}`}
           </Paper>
         </Grid>
       </Grid>
