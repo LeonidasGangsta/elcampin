@@ -37,22 +37,14 @@ app.use((req, res) => {
 // Force=true === DROP TABLES
 sequelize.sync({ force: false })
   .then(() => {
-    console.log('Database was connected succesfully')
+    console.log('Database was connected successfully')
 
     // Inject testing data
-    /* barnsForBD.forEach(async (barn) => {
-      try {
-        const barnCreated = await Barn.create(barn);
-        // @ts-expect-error dataValues is a valid property
-        logsForBD(barnCreated.dataValues.id).forEach(async (log) => await Log.create(log));
-      } catch (error) {
-        console.log(error);
-      }
-    }) */
+    // setTestingData();
 
   }).catch((err) => {
     console.error(err);
-    console.log('An error ocurred trying to connect to the databse')
+    console.log('An error ocurred trying to connect to the database')
   });
 
 app.listen(port, () => {

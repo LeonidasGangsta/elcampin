@@ -5,7 +5,7 @@ import createStyles from '@mui/styles/createStyles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
-import { getPercentageOfOcupation } from 'src/utils/barnUtils/barnUtils';
+import { getPercentageOfOccupation } from 'src/utils/barnUtils';
 import { getBarnDateInSpanish } from 'src/utils/dateUtils';
 import { BarnsType } from 'src/utils/types';
 
@@ -67,7 +67,7 @@ const BarnGeneralDetails = ({ id }: BarnGeneralDetailsProps): JSX.Element => {
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            {`Porcentaje de ocupacion: ${getPercentageOfOcupation(maxCapacity, chickensInIt, 1)} %`}
+            {`Porcentaje de ocupacion: ${getPercentageOfOccupation(maxCapacity, chickensInIt, 1)} %`}
           </Paper>
         </Grid>
       </Grid>

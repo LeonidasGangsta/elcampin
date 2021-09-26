@@ -12,7 +12,7 @@ interface CustomInputProps {
   type?: string,
   helperText?: string,
   defaultErrorMessage?: string,
-  externalClass?: string,
+  className?: string,
   disabled?: boolean,
 }
 
@@ -26,7 +26,7 @@ const ControlledInput = ({
   type,
   helperText,
   defaultErrorMessage,
-  externalClass,
+  className: externalClass,
   disabled,
 }: CustomInputProps): JSX.Element => (
   <Controller

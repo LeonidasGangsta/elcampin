@@ -1,31 +1,33 @@
+import { Barn, Log } from "./models";
+
 type BarnType = {
-  barnNumber: number, 
-  maxCapacity: number, 
+  barnNumber: number,
+  maxCapacity: number,
   chickensInIt: number,
 }
 
 type LogType = {
   BarnId: number,
-  eggs: number, 
-  date: Date, 
+  eggs: number,
+  date: Date,
   chickensInIt: number,
 }
 
 export const barnsForBD: BarnType[] = [
   {
-  barnNumber: 1,
-  maxCapacity: 200,
-  chickensInIt: 150,
+    barnNumber: 1,
+    maxCapacity: 200,
+    chickensInIt: 150,
   },
   {
-  barnNumber: 2,
-  maxCapacity: 150,
-  chickensInIt: 50,
+    barnNumber: 2,
+    maxCapacity: 150,
+    chickensInIt: 50,
   },
   {
-  barnNumber: 3,
-  maxCapacity: 200,
-  chickensInIt: 200,
+    barnNumber: 3,
+    maxCapacity: 200,
+    chickensInIt: 200,
   },
 ];
 
@@ -61,3 +63,14 @@ export const logsForBD = (BarnId: number): LogType[] => [
     BarnId,
   },
 ];
+
+export const setTestingData = () => {
+  barnsForBD.forEach(async (barn) => {
+    try {
+      const barnCreated = await Barn.create(barn);
+      logsForBD(barnCreated.getDataValue('id')).forEach((log) => Log.create(log));
+    } catch (error) {
+      console.log(error);
+    }
+  })
+};
