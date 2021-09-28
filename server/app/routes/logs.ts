@@ -36,7 +36,7 @@ LogsEndpoints.post('/create', async ({ body }, res) => {
   try {
     const { log } = body;
     const logToCreate = await Log.create({
-      date: log.date,
+      date: new Date(log.date),
       eggs: log.eggs,
       chickensInIt: log.chickensInIt,
       BarnId: log.barnID,
