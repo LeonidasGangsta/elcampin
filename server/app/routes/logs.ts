@@ -22,7 +22,7 @@ LogsEndpoints.get('/:logID', async ({ params: { logID } }, res) => {
     const log = await Log.findByPk(logID as string);
     res.send(log);
   } catch (error) {
-    res.send(error);    
+    res.send(error);
   }
 });
 
@@ -35,20 +35,21 @@ LogsEndpoints.post('/create', async ({ body }, res) => {
 
   try {
     const { log } = body;
+    const [year, month, day] = log.date.split('-')
     const logToCreate = await Log.create({
-      date: new Date(log.date),
+      date: typeof log.date === 'string' ? new Date(Date.UTC(year, month, day, 12)) : log.date,
       eggs: log.eggs,
       chickensInIt: log.chickensInIt,
       BarnId: log.barnID,
     });
-    
-    res.send({ log: logToCreate, message: 'Log created succesfully' });
+
+    res.send({ log: logToCreate, message: 'Log created successfully' });
   } catch (error) {
     res.status(400).send(error || 'An error just ocurred');
   }
 });
 
-// Modify an existing log on the databse
+// Modify an existing log on the database
 LogsEndpoints.patch('/update/:LogID', async ({ body, params: { LogID } }, res) => {
   if (!body?.log) res.status(400).send('Missing log to modify')
 
