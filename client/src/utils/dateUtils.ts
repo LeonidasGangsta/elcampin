@@ -1,4 +1,9 @@
-export const getLogDateInSpanish = (date: string | Date) => new Date(date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+export const getLogDateInSpanish = (date: string) => {
+  const [year, month, day] = date.slice(0, 10).split('-').map(Number);
+  return new Date(year, month - 1, day, 12).toLocaleDateString('es-ES', {
+    day: 'numeric', month: 'short', year: 'numeric',
+  });
+};
 
 export const getBarnDateInSpanish = (dateInIsoString: string | Date) => {
   const date = new Date(dateInIsoString);

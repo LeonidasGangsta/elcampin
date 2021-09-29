@@ -35,9 +35,8 @@ LogsEndpoints.post('/create', async ({ body }, res) => {
 
   try {
     const { log } = body;
-    const [year, month, day] = log.date.split('-')
     const logToCreate = await Log.create({
-      date: typeof log.date === 'string' ? new Date(Date.UTC(year, month, day, 12)) : log.date,
+      date: log.date,
       eggs: log.eggs,
       chickensInIt: log.chickensInIt,
       BarnId: log.barnID,
