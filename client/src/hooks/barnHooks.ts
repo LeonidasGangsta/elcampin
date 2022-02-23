@@ -1,6 +1,6 @@
-import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import useBarnsContext from 'src/hooks/useBarnsContext';
 
-export const barnHooks = () => {
+const barnHooks = () => {
   const { barns } = useBarnsContext();
 
   const validateNewBarnNumber = (barnNumberToSearch: number | string) => {
@@ -21,3 +21,5 @@ export const barnHooks = () => {
     findNextBarnNumber,
   };
 };
+
+export default barnHooks;

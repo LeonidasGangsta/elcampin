@@ -1,4 +1,6 @@
 import { useContext } from 'react';
 import { BarnsContext } from 'src/context/BarnsContext';
 
-export const useBarnsContext = () => useContext(BarnsContext);
+const useBarnsContext = () => useContext(BarnsContext);
+
+export default useBarnsContext;

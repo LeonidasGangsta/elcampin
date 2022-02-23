@@ -4,8 +4,8 @@ import { Drawer, Button, Modal } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { BarnsType, CreateBarnType } from 'src/utils/types';
 import { createANewBarn, deleteABarn, updateABarn } from 'src/utils/api/barns';
-import { barnHooks } from 'src/hooks/barnHooks';
-import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import barnHooks from 'src/hooks/barnHooks';
+import useBarnsContext from 'src/hooks/useBarnsContext';
 import { getNumberInputRules } from 'src/utils/barnUtils';
 import ControlledInput from './ControlledInput';
 import AlertBar from './AlertBar';
@@ -108,7 +108,6 @@ function BarnDrawer({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       }
       throw Error('An error ocurred deleting the barn');
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(error);
       return null;
     }
@@ -124,7 +123,6 @@ function BarnDrawer({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       setAlertMessage('Galpon editado exitosamente.');
       return barnCreatedOrUpdated;
     } catch (error) {
-      // eslint-disable-next-line no-alert
       alert(error);
       return null;
     } finally {

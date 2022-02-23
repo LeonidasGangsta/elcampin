@@ -13,7 +13,7 @@ interface ParamsType {
   readonly [key: string]: string | number | object
 }
 
-export const httpHelper = {
+const httpHelper = {
   get: async (url: string, params?: ParamsType) => {
     try {
       const response = await axios.get(`${API_URL}${url}`, params);
@@ -51,3 +51,5 @@ export const httpHelper = {
     }
   },
 };
+
+export default httpHelper;
