@@ -15,7 +15,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: [
@@ -23,8 +23,6 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
-    'linebreak-style': 0,
-    'react/prop-types': 0,
     '@typescript-eslint/naming-convention': [
       2,
       {
@@ -34,6 +32,5 @@ module.exports = {
       },
     ],
     'react/require-default-props': 0,
-    'import/prefer-default-export': 0,
   },
 };

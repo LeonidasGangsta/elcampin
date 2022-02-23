@@ -15,22 +15,16 @@ const NewRecord = React.lazy(() => import('./pages/NewRecord'));
 function App() {
   return (
     <Suspense fallback={<CircularProgress />}>
-      <Router>
-        <BarnsContextProvider>
+      <BarnsContextProvider>
+        <Router>
           <NavigationBar />
           <Routes>
-            <Route path="/">
-              <Home />
-            </Route>
-            <Route path="/galpon/:barnID">
-              <BarnDetail />
-            </Route>
-            <Route path="/recogida/nueva">
-              <NewRecord />
-            </Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/galpon/:barnID" element={<BarnDetail />} />
+            <Route path="/recogida/nueva" element={<NewRecord />} />
           </Routes>
-        </BarnsContextProvider>
-      </Router>
+        </Router>
+      </BarnsContextProvider>
     </Suspense>
   );
 }
