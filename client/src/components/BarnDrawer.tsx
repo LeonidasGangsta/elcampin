@@ -108,7 +108,7 @@ function BarnDrawer({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       }
       throw Error('An error ocurred deleting the barn');
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return null;
     }
   };
@@ -123,7 +123,7 @@ function BarnDrawer({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       setAlertMessage('Galpon editado exitosamente.');
       return barnCreatedOrUpdated;
     } catch (error) {
-      alert(error);
+      // alert(error);
       return null;
     } finally {
       setIsLoading(false);

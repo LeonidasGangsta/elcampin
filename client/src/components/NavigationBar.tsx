@@ -5,10 +5,11 @@ import makeStyles from '@mui/styles/makeStyles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import { Home } from '@mui/icons-material';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -25,9 +26,18 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 function NavigationBar() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
 
   const handleLinkToHome = () => {
     navigate('/');
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const handleLogIn = () => {
+    loginWithRedirect();
   };
 
   return (
@@ -47,7 +57,9 @@ function NavigationBar() {
           <Typography variant="h6" className={classes.title}>
             Finca El Campin
           </Typography>
-          {/* <Button component={RouterLink} to="/test" color="inherit">Login</Button> */}
+          <Button color="inherit" onClick={isAuthenticated ? handleLogout : handleLogIn}>
+            {isAuthenticated ? 'Cerrar sesión' : 'Iniciar sesión'}
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
