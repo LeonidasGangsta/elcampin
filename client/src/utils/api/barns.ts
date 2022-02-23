@@ -1,5 +1,5 @@
 import { BarnsType, CreateBarnType } from '../types';
-import { httpHelper } from './httpHelper';
+import httpHelper from './httpHelper';
 
 export const getAllBarns = async () => {
   try {
