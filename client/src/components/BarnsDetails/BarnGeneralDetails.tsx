@@ -24,7 +24,7 @@ type BarnGeneralDetailsProps = {
   id: number,
 };
 
-const BarnGeneralDetails = ({ id }: BarnGeneralDetailsProps): JSX.Element => {
+function BarnGeneralDetails({ id }: BarnGeneralDetailsProps): JSX.Element {
   const classes = useStyles();
   const { barns } = useBarnsContext();
   const {
@@ -73,6 +73,6 @@ const BarnGeneralDetails = ({ id }: BarnGeneralDetailsProps): JSX.Element => {
       </Grid>
     </div>
   );
-};
+}
 
 export default BarnGeneralDetails;

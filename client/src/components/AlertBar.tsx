@@ -20,9 +20,10 @@ interface AlertBarProps {
   severity?: 'error' | 'info' | 'success' | 'warning',
   variant?: 'filled' | 'outlined' | 'standard',
   onClose?: () => void,
+  children: React.ReactNode,
 }
 
-const AlertBar: React.FC<AlertBarProps> = ({
+function AlertBar({
   title,
   externalClass = '',
   closeText = 'cerrar',
@@ -31,7 +32,7 @@ const AlertBar: React.FC<AlertBarProps> = ({
   variant,
   onClose,
   children,
-}) => {
+}: AlertBarProps) {
   const classes = useStyles();
 
   return (
@@ -50,6 +51,6 @@ const AlertBar: React.FC<AlertBarProps> = ({
       </Alert>
     </div>
   );
-};
+}
 
 export default AlertBar;

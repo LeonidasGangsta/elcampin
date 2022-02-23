@@ -42,7 +42,7 @@ interface BarnDrawerProps {
   barnToEdit?: BarnsType;
 }
 
-const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element => {
+function BarnDrawer({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -189,6 +189,6 @@ const BarnDrawer = ({ open, onClose, barnToEdit }: BarnDrawerProps): JSX.Element
       </Modal>
     </Drawer>
   );
-};
+}
 
 export default BarnDrawer;

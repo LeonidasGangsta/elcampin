@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Container, Skeleton } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BarnCard from 'src/components/BarnCard';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
 
 import BarnDrawer from 'src/components/BarnDrawer';
 import LogsList from 'src/components/LogsList';
+import SkeletonsCards from 'src/components/SkeletonCards';
 
 const useStyles = makeStyles({
   root: {
@@ -33,9 +34,9 @@ const useStyles = makeStyles({
   },
 });
 
-const Home = () => {
+function Home() {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const {
     isLoading, barns, logs, isDefault,
   } = useBarnsContext();
@@ -50,16 +51,8 @@ const Home = () => {
   };
 
   const handleCreateNewRecord = () => {
-    history.push('/recogida/nueva');
+    navigate('/recogida/nueva');
   };
-
-  const SkeletonsCards: React.FC = () => (
-    <>
-      <Skeleton variant="rectangular" height={418.4} width={338.5} className={classes.barnCard} />
-      <Skeleton variant="rectangular" height={418.4} width={338.5} className={classes.barnCard} />
-      <Skeleton variant="rectangular" height={418.4} width={338.5} className={classes.barnCard} />
-    </>
-  );
 
   return (
     <Container className={classes.root}>
@@ -94,6 +87,6 @@ const Home = () => {
       </Button>
     </Container>
   );
-};
+}
 
 export default Home;

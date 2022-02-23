@@ -16,7 +16,7 @@ interface CustomInputProps {
   disabled?: boolean,
 }
 
-const ControlledInput = ({
+function ControlledInput({
   name,
   control,
   defaultValue = '',
@@ -28,29 +28,31 @@ const ControlledInput = ({
   defaultErrorMessage,
   className: externalClass,
   disabled,
-}: CustomInputProps): JSX.Element => (
-  <Controller
-    name={name}
-    control={control}
-    defaultValue={defaultValue}
-    rules={rules}
-    render={({
-      field,
-      fieldState: { error },
-    }) => (
-      <TextField
+}: CustomInputProps): JSX.Element {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      defaultValue={defaultValue}
+      rules={rules}
+      render={({
+        field,
+        fieldState: { error },
+      }) => (
+        <TextField
         // eslint-disable-next-line react/jsx-props-no-spreading
-        {...field}
-        label={label}
-        variant={variant}
-        type={type}
-        className={externalClass}
-        error={Boolean(error?.type)}
-        helperText={error ? (error?.message || defaultErrorMessage) : helperText}
-        disabled={disabled}
-      />
-    )}
-  />
-);
+          {...field}
+          label={label}
+          variant={variant}
+          type={type}
+          className={externalClass}
+          error={Boolean(error?.type)}
+          helperText={error ? (error?.message || defaultErrorMessage) : helperText}
+          disabled={disabled}
+        />
+      )}
+    />
+  );
+}
 
 export default ControlledInput;

@@ -15,9 +15,10 @@ interface CustomInputProps {
   defaultErrorMessage?: string,
   className?: string,
   disabled?: boolean,
+  children?: React.ReactNode,
 }
 
-const ControlledSelect: React.FC<CustomInputProps> = ({
+function ControlledSelect({
   name,
   control,
   defaultValue = '',
@@ -29,41 +30,43 @@ const ControlledSelect: React.FC<CustomInputProps> = ({
   className,
   disabled,
   children,
-}) => (
-  <Controller
-    name={name}
-    control={control}
-    defaultValue={defaultValue}
-    rules={rules}
-    render={({
-      field,
-      fieldState: { error },
-    }) => (
-      <FormControl className={className}>
-        <InputLabel id={`${label}-${name}`}>{label}</InputLabel>
-        <Select
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...field}
-          labelId={`${label}-${name}`}
-          label={label}
-          error={Boolean(error)}
-          disabled={disabled}
-          variant={variant}
-        >
-          {children}
-        </Select>
-        {error && (
-          <FormHelperText>
-            {error
-              ? (error?.message || defaultErrorMessage)
-              : helperText}
+}: CustomInputProps) {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      defaultValue={defaultValue}
+      rules={rules}
+      render={({
+        field,
+        fieldState: { error },
+      }) => (
+        <FormControl className={className}>
+          <InputLabel id={`${label}-${name}`}>{label}</InputLabel>
+          <Select
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...field}
+            labelId={`${label}-${name}`}
+            label={label}
+            error={Boolean(error)}
+            disabled={disabled}
+            variant={variant}
+          >
+            {children}
+          </Select>
+          {error && (
+            <FormHelperText>
+              {error
+                ? (error?.message || defaultErrorMessage)
+                : helperText}
 
-          </FormHelperText>
+            </FormHelperText>
 
-        )}
-      </FormControl>
-    )}
-  />
-);
+          )}
+        </FormControl>
+      )}
+    />
+  );
+}
 
 export default ControlledSelect;

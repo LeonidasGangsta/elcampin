@@ -12,7 +12,7 @@ import {
   Avatar, List, ListItem, ListItemAvatar, ListItemText,
 } from '@mui/material';
 import { AssessmentRounded, HeightRounded } from '@mui/icons-material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BarnsType } from 'src/utils/types';
 import BarnDrawer from './BarnDrawer';
 
@@ -31,9 +31,9 @@ type BarnCardProps = {
   barn: BarnsType,
 };
 
-const BarnCard: React.FC<BarnCardProps> = ({ barn }) => {
+function BarnCard({ barn }: BarnCardProps) {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isShowingDrawer, setIsShowingDrawer] = useState(false);
 
   const handleEditBarn = () => {
@@ -45,7 +45,7 @@ const BarnCard: React.FC<BarnCardProps> = ({ barn }) => {
   };
 
   const handleOpenBarnDetails = () => {
-    history.push(`galpon/${barn.id}`);
+    navigate(`galpon/${barn.id}`);
   };
 
   return (
@@ -90,6 +90,6 @@ const BarnCard: React.FC<BarnCardProps> = ({ barn }) => {
       </CardActions>
     </Card>
   );
-};
+}
 
 export default BarnCard;

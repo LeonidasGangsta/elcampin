@@ -10,7 +10,7 @@ import ControlledInput from 'src/components/ControlledInput';
 import { createNewLog } from 'src/utils/api/logs';
 import { BarnsType, CreateLogType } from 'src/utils/types';
 import { useBarnsContext } from 'src/hooks/useBarnsContext';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ControlledSelect from 'src/components/ControlledSelect';
 import { eggsFromTakeRules, getSelectBarnRules, rulesForTakesDate } from 'src/utils/logUtils';
 
@@ -48,10 +48,10 @@ const Button = styled(MuiButton)(({ theme }) => ({
   fontWeight: 600,
 }));
 
-const NewRecord = () => {
+function NewRecord() {
   const { handleSubmit, control } = useForm<FormData>();
   const { barns, refreshState } = useBarnsContext();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const initialDate: string = (() => {
     const date = new Date();
@@ -69,7 +69,7 @@ const NewRecord = () => {
 
     try {
       const logCreated = await createNewLog(newLog);
-      history.push('/');
+      navigate('/');
       return logCreated;
     } catch (error) {
       return null;
@@ -124,6 +124,6 @@ const NewRecord = () => {
       </Button>
     </Form>
   );
-};
+}
 
 export default NewRecord;

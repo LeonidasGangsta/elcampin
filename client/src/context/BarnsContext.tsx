@@ -26,13 +26,13 @@ const initialStateContext: BarnContextInterface = {
   isLoading: true,
   barns: [],
   logs: [],
-  updateBarnsContext: () => {},
-  refreshState: () => {},
+  updateBarnsContext: () => { },
+  refreshState: () => { },
 };
 
 export const BarnsContext = createContext(initialStateContext);
 
-export const BarnsContextProvider: React.FC = ({ children }) => {
+export function BarnsContextProvider({ children }: { children: React.ReactNode }) {
   const [contextValue, setContextValue] = useState<BarnContextInterface>(initialStateContext);
   const handleUpdateContext = (partialContext: Partial<BarnContextInterface>) => (
     setContextValue((prev) => ({
@@ -78,4 +78,4 @@ export const BarnsContextProvider: React.FC = ({ children }) => {
       ) : children}
     </BarnsContext.Provider>
   );
-};
+}

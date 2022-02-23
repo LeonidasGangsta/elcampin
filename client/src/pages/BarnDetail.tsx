@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TabPanel = ({ children, value, index }: TabPanelProps): JSX.Element => {
+function TabPanel({ children, value, index }: TabPanelProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -45,7 +45,7 @@ const TabPanel = ({ children, value, index }: TabPanelProps): JSX.Element => {
       )}
     </div>
   );
-};
+}
 
 interface BarnTabsType {
   label: string,
@@ -71,7 +71,7 @@ const BARN_TABS: BarnTabsType[] = [
   },
 ];
 
-const BarnDetail = (): JSX.Element => {
+function BarnDetail(): JSX.Element {
   const classes = useStyles();
   const { barnID } = useParams<{ barnID: string }>();
   const [value, setValue] = React.useState(0);
@@ -101,6 +101,6 @@ const BarnDetail = (): JSX.Element => {
       ))}
     </div>
   );
-};
+}
 
 export default BarnDetail;

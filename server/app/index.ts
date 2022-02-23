@@ -35,7 +35,7 @@ app.use((req, res) => {
 
 // Connect to the database
 // Force=true === DROP TABLES
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
   .then(() => {
     console.log('Database was connected successfully')
 

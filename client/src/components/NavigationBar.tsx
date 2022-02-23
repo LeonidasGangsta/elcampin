@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Home } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }));
 
-const NavigationBar = () => {
+function NavigationBar() {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLinkToHome = () => {
-    history.push('/');
+    navigate('/');
   };
 
   return (
@@ -52,6 +52,6 @@ const NavigationBar = () => {
       </AppBar>
     </div>
   );
-};
+}
 
 export default NavigationBar;

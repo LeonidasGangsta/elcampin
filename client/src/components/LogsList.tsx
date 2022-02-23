@@ -28,7 +28,7 @@ interface LogsListProps {
   // barnId?: string | number,
 }
 
-const LogsList = ({ logs }: LogsListProps): JSX.Element => {
+function LogsList({ logs }: LogsListProps): JSX.Element {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const classes = useStyles();
@@ -89,6 +89,6 @@ const LogsList = ({ logs }: LogsListProps): JSX.Element => {
       </Table>
     </TableContainer>
   );
-};
+}
 
 export default LogsList;
