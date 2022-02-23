@@ -2,6 +2,7 @@ import sequelize from "../database/db";
 import express from "express";
 import routes from "./routes";
 import { CLIENT_DIRECTORY } from "../config";
+// import { setTestingData } from "./testingData";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -35,7 +36,7 @@ app.use((req, res) => {
 
 // Connect to the database
 // Force=true === DROP TABLES
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
   .then(() => {
     console.log('Database was connected successfully')
 
