@@ -3,7 +3,7 @@ import { Button, Container } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { useNavigate } from 'react-router-dom';
 import BarnCard from 'src/components/BarnCard';
-import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import useBarnsContext from 'src/hooks/useBarnsContext';
 
 import BarnDrawer from 'src/components/BarnDrawer';
 import LogsList from 'src/components/LogsList';

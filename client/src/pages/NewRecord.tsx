@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import ControlledInput from 'src/components/ControlledInput';
 import { createNewLog } from 'src/utils/api/logs';
 import { BarnsType, CreateLogType } from 'src/utils/types';
-import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import useBarnsContext from 'src/hooks/useBarnsContext';
 import { useNavigate } from 'react-router-dom';
 import ControlledSelect from 'src/components/ControlledSelect';
 import { eggsFromTakeRules, getSelectBarnRules, rulesForTakesDate } from 'src/utils/logUtils';

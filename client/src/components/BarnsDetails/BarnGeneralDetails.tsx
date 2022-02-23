@@ -4,7 +4,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import createStyles from '@mui/styles/createStyles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import { useBarnsContext } from 'src/hooks/useBarnsContext';
+import useBarnsContext from 'src/hooks/useBarnsContext';
 import { getPercentageOfOccupation } from 'src/utils/barnUtils';
 import { getBarnDateInSpanish } from 'src/utils/dateUtils';
 import { BarnsType } from 'src/utils/types';
