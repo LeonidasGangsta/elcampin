@@ -19,11 +19,9 @@
     "sequelize": "^6.16.2",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "@types/cors": "^2.8.12"
   },
   "keywords": [],
-  "description": "",
-  "devDependencies": {
-    "@types/cors": "^2.8.12"
-  }
+  "description": ""
 }
