@@ -13,8 +13,7 @@ app.use(express.static(CLIENT_DIRECTORY));
 
 // cors middleware
 const corsOptions: cors.CorsOptions = {
-  origin: "localhost:4000",
-  optionsSuccessStatus: 200,
+  origin: "https://elcampin.herokuapp.com",
   methods: "GET,POST,PATCH,DELETE",
 };
 
