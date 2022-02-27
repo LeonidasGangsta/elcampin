@@ -40,7 +40,7 @@ function BarnGeneralDetails({ id }: BarnGeneralDetailsProps): JSX.Element {
       <Grid container spacing={3}>
         <Grid item xs>
           <Paper className={classes.paper}>
-            {`Galpon #${barnNumber}`}
+            {`Galpón #${barnNumber}`}
           </Paper>
         </Grid>
         <Grid item xs>
@@ -67,7 +67,7 @@ function BarnGeneralDetails({ id }: BarnGeneralDetailsProps): JSX.Element {
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>
-            {`Porcentaje de ocupacion: ${getPercentageOfOccupation(maxCapacity, chickensInIt, 1)} %`}
+            {`Porcentaje de ocupación: ${getPercentageOfOccupation(maxCapacity, chickensInIt, 1)} %`}
           </Paper>
         </Grid>
       </Grid>

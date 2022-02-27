@@ -38,6 +38,7 @@ LogsEndpoints.post('/create', async ({ body }, res) => {
     const logToCreate = await Log.create({
       date: log.date,
       eggs: log.eggs,
+      type: log.type,
       chickensInIt: log.chickensInIt,
       BarnId: log.barnID,
     });
@@ -58,6 +59,7 @@ LogsEndpoints.patch('/update/:LogID', async ({ body, params: { LogID } }, res) =
       date: log.date,
       eggs: log.eggs,
       chickensInIt: log.chickensInIt,
+      type: log.type,
     }, {
       where: {
         id: LogID,

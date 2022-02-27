@@ -1,5 +1,6 @@
-import sequelize from "../database/db";
 import express from "express";
+import cors from "cors";
+import sequelize from "../database/db";
 import routes from "./routes";
 import { CLIENT_DIRECTORY } from "../config";
 // import { setTestingData } from "./testingData";
@@ -10,15 +11,19 @@ const port = process.env.PORT || 4000;
 // Serve the react app
 app.use(express.static(CLIENT_DIRECTORY));
 
-// Middlewares
+// cors middleware
+const corsOptions: cors.CorsOptions = {
+  origin: "localhost:4000",
+  optionsSuccessStatus: 200,
+  methods: "GET,POST,PATCH,DELETE",
+};
+
+app.use(cors(corsOptions));
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "*");
-  res.header("Access-Control-Allow-Methods", "POST, GET, PATCH, DELETE");
-  next();
-})
+
 
 // Routes
 const { barns, logs } = routes;

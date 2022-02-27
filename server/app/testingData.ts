@@ -8,6 +8,7 @@ type BarnType = {
 
 type LogType = {
   BarnId: number,
+  type: "add" | "remove",
   eggs: number,
   date: Date,
   chickensInIt: number,
@@ -34,30 +35,35 @@ export const barnsForBD: BarnType[] = [
 export const logsForBD = (BarnId: number): LogType[] => [
   {
     chickensInIt: 150,
+    type: "add",
     date: new Date(),
     eggs: 100,
     BarnId,
   },
   {
     chickensInIt: 150,
+    type: "add",
     date: new Date(),
     eggs: 100,
     BarnId,
   },
   {
     chickensInIt: 50,
+    type: "add",
     date: new Date(),
     eggs: 10,
     BarnId,
   },
   {
     chickensInIt: 200,
+    type: "add",
     date: new Date(),
     eggs: 80,
     BarnId,
   },
   {
     chickensInIt: 200,
+    type: "add",
     date: new Date(),
     eggs: 120,
     BarnId,

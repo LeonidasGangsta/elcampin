@@ -37,6 +37,10 @@ export const Log: LogsModelType = sequelize.define('Logs', {
     allowNull: false,
     defaultValue: new Date(),
   },
+  type: {
+    type: DataTypes.ENUM('add', 'remove'),
+    allowNull: false,
+  },
   eggs: {
     type: DataTypes.INTEGER,
     allowNull: false,

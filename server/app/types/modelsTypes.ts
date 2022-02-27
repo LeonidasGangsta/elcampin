@@ -1,6 +1,6 @@
-import { Model, ModelCtor } from "sequelize/types";
+import { Model, ModelStatic } from "sequelize/types";
 
-export type BarnModelType = ModelCtor<Model<{
+export type BarnModelType = ModelStatic<Model<{
   id: number,
   barnNumber: number, 
   maxCapacity: number, 
@@ -12,16 +12,18 @@ export type BarnModelType = ModelCtor<Model<{
   chickensInIt: number,
 }>>;
 
-export type LogsModelType = ModelCtor<Model<{
+export type LogsModelType = ModelStatic<Model<{
   id: number,
   BarnId: number,
-  eggs: number, 
+  type: "add" | "remove",
+  eggs: number,
   date: string, 
   chickensInIt?: number,
 },
 {
   eggs: number, 
+  BarnId: number,
+  type: "add" | "remove",
   date: Date, 
   chickensInIt: number,
-  BarnId: number,
 }>>;
